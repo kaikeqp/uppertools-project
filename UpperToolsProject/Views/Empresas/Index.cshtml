@@ -1,0 +1,185 @@
+﻿@model IEnumerable<UpperToolsProject.Models.Empresa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AdicionarCadastro">Adicionar Cadastro</a>
+</p>
+<table class="table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataSituacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotivoSituacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Situacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Porte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abertura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NaturezaJuridica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UltimaAtualizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fantasia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complemento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Municipio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Efr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SituacaoEspecial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataSituacaoEspecial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CapitalSocial)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Qsa[0].Nome)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cnpj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataSituacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotivoSituacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Situacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Porte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Abertura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NaturezaJuridica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UltimaAtualizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fantasia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logradouro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complemento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Municipio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Uf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Efr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SituacaoEspecial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataSituacaoEspecial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CapitalSocial)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Qsa[0].Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Cnpj">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Cnpj">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Cnpj">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
