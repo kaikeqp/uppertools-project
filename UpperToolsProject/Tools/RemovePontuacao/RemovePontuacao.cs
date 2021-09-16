@@ -9,7 +9,12 @@ namespace UpperToolsProject.Tools.RemovePontuacao
     {
         public static string RmPontCnpj(string cnpj)
         {
-            return cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+            if (cnpj != null && cnpj != string.Empty)
+            {
+                return cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+
+            }
+            else return cnpj;
         }
     }
 }

@@ -73,17 +73,18 @@ namespace UpperToolsProject.Controllers
 
             if (response.IsSuccessStatusCode && empresas.Status == "OK" && ValidaCNPJ.IsCnpj(cnpj))
             {
-                if (EmpresaExists(empresa.Cnpj))
+
+
+                empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
+                if (EmpresaExists(empresas.Cnpj))
                 {
-                    return View("Delete");
-                }
-                else {
-                    empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
-                    _context.Add(empresas);
-                    await _context.SaveChangesAsync();
-                    bool success = true;
-                    ViewBag.success = success;
-                }
+                    return View("BuscarCadastro");
+                }else
+                _context.Add(empresas);
+                await _context.SaveChangesAsync();
+                bool success = true;
+                ViewBag.success = success;
+
             }
             else
             {
@@ -103,7 +104,7 @@ namespace UpperToolsProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BuscarCadastro(Empresa emp)
         {
-
+            emp.Cnpj = RemovePontuacao.RmPontCnpj(emp.Cnpj);
             string id = emp.Cnpj;
             string nome = emp.Nome;
 
@@ -131,7 +132,7 @@ namespace UpperToolsProject.Controllers
             }
             ViewBag.emp = empresa;
             return View("Details");
-        }     
+        }
 
         // GET: Empresas/Delete/
         public IActionResult Delete()
