@@ -14,7 +14,7 @@ namespace UpperToolsProject.Migrations
                     DataSituacao = table.Column<string>(type: "text", nullable: true),
                     MotivoSituacao = table.Column<string>(type: "text", nullable: true),
                     Tipo = table.Column<string>(type: "text", nullable: true),
-                    Nome = table.Column<string>(type: "text", nullable: true),
+                    Nome = table.Column<string>(type: "text", nullable: false),
                     Telefone = table.Column<string>(type: "text", nullable: true),
                     Situacao = table.Column<string>(type: "text", nullable: true),
                     Porte = table.Column<string>(type: "text", nullable: true),

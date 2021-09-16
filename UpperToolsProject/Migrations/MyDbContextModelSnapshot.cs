@@ -87,6 +87,7 @@ namespace UpperToolsProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Numero")

@@ -6,7 +6,7 @@
 
 <h1>Empresas</h1>
 
-<h4>Adicionar</h4>
+<h4>Cadastrar CNPJ</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,19 +14,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Cnpj" class="control-label"></label>
-                <input asp-for="Cnpj" class="form-control" />
+                <input placeholder="Digite o CNPJ da empresa" asp-for="Cnpj" class="form-control" />
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-primary " id="toastrSuccess" />
+                <button type="submit" class="btn btn-outline-dark " id="toastrSuccess">Enviar</button>
             </div>
         </form>
     </div>
 </div>
 
+<br />
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
+
+
 
 
 @section Scripts {
@@ -34,6 +38,9 @@
 
     <script type="text/javascript">
 
+            if (@ViewBag.success) {
+            alert("sla")
+}
 
     $(function () {
         $("#toastrSuccess").click(function () {
@@ -55,8 +62,11 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             },
-            @Html.ViewContext
-            toastr.info("Os dados do Cpnj só serão guardados caso o valor informado seja válido.");
+
+            toastr.success("CNPJ guardado no banco de dados com sucesso!");
+
+
+
 
 
         });

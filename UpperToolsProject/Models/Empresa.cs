@@ -20,6 +20,8 @@ namespace UpperToolsProject.Models
         public string DataSituacao { get; set; }
         public string MotivoSituacao { get; set; }
         public string Tipo { get; set; }
+        [Display(Name ="Nome")]
+        [Required(ErrorMessage ="Preencha este campo")]
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public List<Qsa> Qsa { get; set; }

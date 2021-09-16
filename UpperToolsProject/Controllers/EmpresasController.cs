@@ -73,15 +73,23 @@ namespace UpperToolsProject.Controllers
 
             if (response.IsSuccessStatusCode && empresas.Status == "OK" && ValidaCNPJ.IsCnpj(cnpj))
             {
-                empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
-                _context.Add(empresas);
-                await _context.SaveChangesAsync();
+                if (EmpresaExists(empresa.Cnpj))
+                {
+                    return View("Delete");
+                }
+                else {
+                    empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
+                    _context.Add(empresas);
+                    await _context.SaveChangesAsync();
+                    bool success = true;
+                    ViewBag.success = success;
+                }
             }
             else
             {
-                return View("AdicionarCadastro");
+                return View();
             }
-            return View();
+            return View("AdicionarCadastro");
         }
 
         // GET: Empresas/BuscarCadastro
@@ -95,100 +103,48 @@ namespace UpperToolsProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BuscarCadastro(Empresa emp)
         {
-            string id = emp.Cnpj;
 
-            if (id == null)
+            string id = emp.Cnpj;
+            string nome = emp.Nome;
+
+            if (id == null && nome == null)
             {
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.Cnpj == id);
+            Empresa empresa = null;
+            if (id != null)
+            {
+                empresa = await _context.Empresa
+                    .FirstOrDefaultAsync(m => m.Cnpj == id);
+            }
+
+            if (nome != null)
+            {
+                empresa = await _context.Empresa
+                    .FirstOrDefaultAsync(m => m.Nome == nome);
+            }
+
             if (empresa == null)
             {
                 return NotFound();
             }
-
-
             ViewBag.emp = empresa;
             return View("Details");
-        }
+        }     
 
-
-        // GET: Empresas/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: Empresas/Delete/
+        public IActionResult Delete()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var empresa = await _context.Empresa.FindAsync(id);
-            if (empresa == null)
-            {
-                return NotFound();
-            }
-            return View(empresa);
+            return View();
         }
 
-        // POST: Empresas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Cnpj,DataSituacao,MotivoSituacao,Tipo,Nome,Telefone,Situacao,Porte,Abertura,NaturezaJuridica,UltimaAtualizacao,Status,Fantasia,Logradouro,Numero,Complemento,Cep,Bairro,Municipio,Uf,Email,Efr,SituacaoEspecial,DataSituacaoEspecial,CapitalSocial")] Empresa empresa)
-        {
-            if (id != empresa.Cnpj)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(empresa);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmpresaExists(empresa.Cnpj))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(empresa);
-        }
-
-        // GET: Empresas/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.Cnpj == id);
-            if (empresa == null)
-            {
-                return NotFound();
-            }
-
-            return View(empresa);
-        }
-
-        // POST: Empresas/Delete/5
+        // POST: Empresas/Delete/cnpj
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Empresa emp)
         {
+            string id = emp.Cnpj;
             var empresa = await _context.Empresa.FindAsync(id);
             _context.Empresa.Remove(empresa);
             await _context.SaveChangesAsync();

@@ -8,7 +8,7 @@ using UpperToolsProject.Data;
 namespace UpperToolsProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210915121213_Init")]
+    [Migration("20210916154322_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,7 @@ namespace UpperToolsProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Numero")

@@ -15,37 +15,45 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Cnpj" class="control-label" for="cnpj"></label>
-                <input asp-for="Cnpj"  class="form-control" id="cnpj"/>
+                <input asp-for="Cnpj" class="form-control" id="cnpj" />
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-primary " id="toastrSuccess" />
- 
-
+                <button type="submit" class="btn btn-sm-4 btn-outline-dark" id="toastrSuccess">Buscar</button>
             </div>
-        </form>
-        <form
-              asp-action="Details">
-            <input type="hidden" asp-for="Cnpj" />
-            <input  type="submit" value="Buscar" class="btn btn-dark" />
-            <a href="Details">Teste</a>
         </form>
     </div>
 </div>
-<table>
-    <tbody>
-    </tbody>
-</table>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <form asp-action="BuscarCadastro">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label" for="nome"></label>
+                <input asp-for="Nome" class="form-control" id="nome" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group md-3">
+                <input type="submit" value="Buscar" class="btn btn-outline-dark" id="toastrSuccess" />
+            </div>
+        </form>
+    </div>
 </div>
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script type="text/javascript">
+
+    <div>
+        <a asp-action="Index">Voltar</a>
+    </div>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+        <script type="text/javascript">
 
 
     $(function () {
@@ -74,8 +82,8 @@
 
         });
     });
-</script>
+        </script>
 
 
 
-}
+    }
