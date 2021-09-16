@@ -41,49 +41,13 @@
         </form>
     </div>
 </div>
+<br />
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
 
 
-
-
-    <div>
-        <a asp-action="Index">Voltar</a>
-    </div>
-
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-        <script type="text/javascript">
-
-
-    $(function () {
-        $("#toastrSuccess").click(function () {
-
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "700",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            },
-            @Html.ViewContext
-            toastr.info("Os dados do Cpnj só serão guardados caso o valor informado seja válido.");
-
-
-        });
-    });
-        </script>
-
-
-
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -2,7 +2,7 @@
 
 namespace UpperToolsProject.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,10 +11,10 @@ namespace UpperToolsProject.Migrations
                 columns: table => new
                 {
                     Cnpj = table.Column<string>(type: "varchar(767)", nullable: false),
+                    Nome = table.Column<string>(type: "text", nullable: false),
                     DataSituacao = table.Column<string>(type: "text", nullable: true),
                     MotivoSituacao = table.Column<string>(type: "text", nullable: true),
                     Tipo = table.Column<string>(type: "text", nullable: true),
-                    Nome = table.Column<string>(type: "text", nullable: false),
                     Telefone = table.Column<string>(type: "text", nullable: true),
                     Situacao = table.Column<string>(type: "text", nullable: true),
                     Porte = table.Column<string>(type: "text", nullable: true),
@@ -83,7 +83,7 @@ namespace UpperToolsProject.Migrations
                         column: x => x.EmpresaCnpj,
                         principalTable: "Empresa",
                         principalColumn: "Cnpj",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

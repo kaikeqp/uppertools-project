@@ -12,7 +12,6 @@ namespace UpperToolsProject.Tools.RemovePontuacao
             if (cnpj != null && cnpj != string.Empty)
             {
                 return cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
-
             }
             else return cnpj;
         }

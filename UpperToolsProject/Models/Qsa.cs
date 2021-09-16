@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UpperToolsProject.Models
 {
+    [Table("Qsa")]
     public class Qsa
     {
         [Key]

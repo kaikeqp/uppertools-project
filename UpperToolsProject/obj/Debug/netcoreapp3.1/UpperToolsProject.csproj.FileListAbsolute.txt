@@ -148,10 +148,8 @@ C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\n
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Empresas\BuscarCadastro.cshtml.g.cs
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Empresas\Delete.cshtml.g.cs
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Empresas\Details.cshtml.g.cs
-C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Empresas\Edit.cshtml.g.cs
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Empresas\Index.cshtml.g.cs
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -164,4 +162,3 @@ C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\n
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.dll
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.pdb
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.genruntimeconfig.cache
-C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.csproj.AssemblyReference.cache

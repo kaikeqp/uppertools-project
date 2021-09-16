@@ -29,7 +29,8 @@ namespace UpperToolsProject.Controllers
             return View(await _context.Empresa.ToListAsync());
         }
 
-        // GET: Empresas/Details/5
+        // GET: Empresas/Details/id
+        //[HttpGet("Empresas/Details/{id}")]
         public async Task<IActionResult> Details(string id)
         {
 
@@ -44,8 +45,8 @@ namespace UpperToolsProject.Controllers
             {
                 return NotFound();
             }
-
-            return View(empresa);
+            View(empresa);
+            return Ok(empresa);
         }
 
         // GET: Empresas/AdicionarCadastro
@@ -79,8 +80,9 @@ namespace UpperToolsProject.Controllers
                 if (EmpresaExists(empresas.Cnpj))
                 {
                     return View("BuscarCadastro");
-                }else
-                _context.Add(empresas);
+                }
+                else
+                    _context.Add(empresas);
                 await _context.SaveChangesAsync();
                 bool success = true;
                 ViewBag.success = success;
@@ -112,7 +114,7 @@ namespace UpperToolsProject.Controllers
             {
                 return NotFound();
             }
-
+            //colocar avisos caso não ache
             Empresa empresa = null;
             if (id != null)
             {
@@ -147,6 +149,7 @@ namespace UpperToolsProject.Controllers
         {
             string id = emp.Cnpj;
             var empresa = await _context.Empresa.FindAsync(id);
+
             _context.Empresa.Remove(empresa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

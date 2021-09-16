@@ -13,7 +13,8 @@ namespace UpperToolsProject.Data
         {
             Database.EnsureCreated();
         }
-
         public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Qsa> Qsa { get; set; }
+
     }
 }

@@ -17,12 +17,12 @@ namespace UpperToolsProject.Models
         [Required(ErrorMessage = "Preencha este campo.")]
         [RegularExpression("[0-9]{2}\\.?[0-9]{3}\\.?[0-9]{3}\\/?[0-9]{4}\\-?[0-9]{2}", ErrorMessage = "Digite um CNPJ válido")]
         public string Cnpj { get; set; }
-        public string DataSituacao { get; set; }
-        public string MotivoSituacao { get; set; }
-        public string Tipo { get; set; }
         [Display(Name ="Nome")]
         [Required(ErrorMessage ="Preencha este campo")]
         public string Nome { get; set; }
+        public string DataSituacao { get; set; }
+        public string MotivoSituacao { get; set; }
+        public string Tipo { get; set; }
         public string Telefone { get; set; }
         public List<Qsa> Qsa { get; set; }
         public string Situacao { get; set; }
