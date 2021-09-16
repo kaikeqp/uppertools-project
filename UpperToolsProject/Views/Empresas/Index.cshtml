@@ -8,6 +8,8 @@
 
 <p>
     <a asp-action="AdicionarCadastro">Adicionar Cadastro</a>
+    <a asp-action="BuscarCadastro">Buscar Cadastro</a>
+
 </p>
 <table class="table-striped table-responsive">
     <thead>
@@ -88,7 +90,7 @@
                 @Html.DisplayNameFor(model => model.CapitalSocial)
             </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Qsa[0].Nome)
+                @Html.DisplayNameFor(model => model.Qsa)
             </th>
             <th></th>
         </tr>
@@ -160,24 +162,33 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.Efr)
-            </td>
+            @Html.DisplayFor(modelItem => item.Efr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SituacaoEspecial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataSituacaoEspecial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CapitalSocial)
+        </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SituacaoEspecial)
+                @Html.DisplayFor(modelItem => item.Qsa.All<string>)
+                }
+                
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataSituacaoEspecial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CapitalSocial)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Qsa[0].Nome)
-            </td>
+            @foreach (var i in item.Qsa[0])
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => i.Nome)
+                </td>
+            }*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Cnpj">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Cnpj">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Cnpj">Delete</a>
+                @Html.ActionLink("Details","Details", new { id = item.Cnpj })
             </td>
         </tr>
 }

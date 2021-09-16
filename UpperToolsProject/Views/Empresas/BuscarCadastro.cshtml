@@ -1,28 +1,41 @@
 ﻿@model UpperToolsProject.Models.Empresa
 
 @{
-    ViewData["Title"] = "AdicionarCadastro";
+    ViewData["Title"] = "BuscarCadastro";
 }
 
 <h1>Empresas</h1>
 
-<h4>Adicionar</h4>
+<h4>Buscar</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AdicionarCadastro">
+        <form asp-action="BuscarCadastro">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Cnpj" class="control-label"></label>
-                <input asp-for="Cnpj" class="form-control" />
+                <label asp-for="Cnpj" class="control-label" for="cnpj"></label>
+                <input asp-for="Cnpj"  class="form-control" id="cnpj"/>
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-primary " id="toastrSuccess" />
+ 
+
             </div>
+        </form>
+        <form
+              asp-action="Details">
+            <input type="hidden" asp-for="Cnpj" />
+            <input  type="submit" value="Buscar" class="btn btn-dark" />
+            <a href="Details">Teste</a>
         </form>
     </div>
 </div>
+<table>
+    <tbody>
+    </tbody>
+</table>
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -32,7 +45,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
 
     $(function () {
@@ -61,7 +74,7 @@
 
         });
     });
-    </script>
+</script>
 
 
 

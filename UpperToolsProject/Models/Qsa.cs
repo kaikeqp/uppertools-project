@@ -9,5 +9,6 @@ namespace UpperToolsProject.Models
         [Key]
         public string Nome { get; set; }
         public string Qual { get; set; }
+
     }
 }

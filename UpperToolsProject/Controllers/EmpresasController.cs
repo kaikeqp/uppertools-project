@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using UpperToolsProject.Data;
 using UpperToolsProject.Models;
+using UpperToolsProject.Tools.RemovePontuacao;
+using UpperToolsProject.Tools.ValidaCnpj;
 
 namespace UpperToolsProject.Controllers
 {
@@ -30,6 +32,7 @@ namespace UpperToolsProject.Controllers
         // GET: Empresas/Details/5
         public async Task<IActionResult> Details(string id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -52,8 +55,6 @@ namespace UpperToolsProject.Controllers
         }
 
         // POST: Empresas/AdicionarCadastro
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AdicionarCadastro([Bind("Cnpj")] Empresa empresa)
@@ -61,23 +62,58 @@ namespace UpperToolsProject.Controllers
             HttpClient client = new HttpClient { BaseAddress = new Uri("https://www.receitaws.com.br/v1/cnpj/") };
 
             string cnpj = empresa.Cnpj;
+            cnpj = RemovePontuacao.RmPontCnpj(cnpj);
             var response = await client.GetAsync(cnpj);
             var content = await response.Content.ReadAsStringAsync();
 
+
+
             Empresa empresas = JsonConvert.DeserializeObject<Empresa>(content, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-            empresas.Cnpj = empresas.Cnpj.Replace("/", "").Replace(".", "").Replace("-", "");
 
-
-            if (empresas != null)
+            if (response.IsSuccessStatusCode && empresas.Status == "OK" && ValidaCNPJ.IsCnpj(cnpj))
             {
-
+                empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
                 _context.Add(empresas);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            return View(empresas);
+            else
+            {
+                return View("AdicionarCadastro");
+            }
+            return View();
         }
+
+        // GET: Empresas/BuscarCadastro
+        public IActionResult BuscarCadastro()
+        {
+            return View();
+        }
+
+        // POST: Empresas/BuscarCadastro
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BuscarCadastro(Empresa emp)
+        {
+            string id = emp.Cnpj;
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var empresa = await _context.Empresa
+                .FirstOrDefaultAsync(m => m.Cnpj == id);
+            if (empresa == null)
+            {
+                return NotFound();
+            }
+
+
+            ViewBag.emp = empresa;
+            return View("Details");
+        }
+
 
         // GET: Empresas/Edit/5
         public async Task<IActionResult> Edit(string id)

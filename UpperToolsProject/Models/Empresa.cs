@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace UpperToolsProject.Models
@@ -12,7 +13,9 @@ namespace UpperToolsProject.Models
     public class Empresa
     {
         [Key]
-        [Required(ErrorMessage ="Este campo não pode ficar vazio.")]
+        [Display(Name = "CNPJ")]
+        [Required(ErrorMessage = "Preencha este campo.")]
+        [RegularExpression("[0-9]{2}\\.?[0-9]{3}\\.?[0-9]{3}\\/?[0-9]{4}\\-?[0-9]{2}", ErrorMessage = "Digite um CNPJ válido")]
         public string Cnpj { get; set; }
         public string DataSituacao { get; set; }
         public string MotivoSituacao { get; set; }

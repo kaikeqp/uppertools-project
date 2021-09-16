@@ -8,8 +8,8 @@ using UpperToolsProject.Data;
 namespace UpperToolsProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210915010825_Initial")]
-    partial class Initial
+    [Migration("20210915121213_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
