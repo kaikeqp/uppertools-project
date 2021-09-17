@@ -163,4 +163,3 @@ C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\n
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.dll
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.pdb
 C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.genruntimeconfig.cache
-C:\Users\kaike\workspaces\ws_net\UpperToolsProject\UpperToolsProject\obj\Debug\netcoreapp3.1\UpperToolsProject.csproj.AssemblyReference.cache

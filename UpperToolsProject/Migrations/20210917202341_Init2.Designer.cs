@@ -129,7 +129,7 @@ namespace UpperToolsProject.Migrations
                     b.HasOne("UpperToolsProject.Models.Empresa", null)
                         .WithMany("Qsa")
                         .HasForeignKey("EmpresaCnpj")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("UpperToolsProject.Models.Empresa", b =>

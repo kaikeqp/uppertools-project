@@ -50,10 +50,12 @@ namespace UpperToolsProject.Controllers
         }
 
         // GET: Empresas/DSocios
-        //public async Task<IActionResult> Dsocios()
-        //{
-        //   return View(await _context.Qsa.ToListAsync());
-        //}
+        public async Task<IActionResult> Dsocios(Empresa emp, Qsa qsa)
+        {
+            ViewBag.cnpj = emp.Cnpj;
+            var qsatolist = await _context.Qsa.ToListAsync();
+            return View(qsatolist);
+        }
 
         // GET: Empresas/AdicionarCadastro
         public IActionResult AdicionarCadastro()
@@ -143,7 +145,7 @@ namespace UpperToolsProject.Controllers
 
             if (empresa == null)
             {
-                TempData["msg"] = "O dado informado é inválido!";
+                TempData["msg"] = "O dado informado não está no banco de dados!";
                 return RedirectToAction("BuscarCadastro");
             }
             ViewBag.emp = empresa;
@@ -171,7 +173,7 @@ namespace UpperToolsProject.Controllers
                 TempData["msg"] = "Este CNPJ não está cadastrado";
                 return RedirectToAction("Delete");
             }
-            empresa.Qsa = null;
+            
             _context.Empresa.Remove(empresa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
