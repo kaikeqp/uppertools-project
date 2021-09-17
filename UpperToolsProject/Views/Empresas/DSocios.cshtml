@@ -1,0 +1,44 @@
+﻿@model IEnumerable<UpperToolsProject.Models.Qsa>
+
+@{
+    ViewData["Title"] = "Details - Socios";
+}
+
+<h1>Informações</h1>
+
+<table class="table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qual)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qual)
+                </td>                
+                @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.Nome">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Qsa">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Cnpj">Delete</a>
+                    @Html.ActionLink("Details", "Details", new { id = item.Cnpj })
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+    <a asp-action="BuscarCadastro">Voltar</a>
+

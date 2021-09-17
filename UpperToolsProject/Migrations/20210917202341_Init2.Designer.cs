@@ -8,8 +8,8 @@ using UpperToolsProject.Data;
 namespace UpperToolsProject.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210916231804_Initial")]
-    partial class Initial
+    [Migration("20210917202341_Init2")]
+    partial class Init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,29 +17,6 @@ namespace UpperToolsProject.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.10");
-
-            modelBuilder.Entity("UpperToolsProject.Models.Atividade", b =>
-                {
-                    b.Property<string>("Code")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("EmpresaCnpj")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("EmpresaCnpj1")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("text");
-
-                    b.HasKey("Code");
-
-                    b.HasIndex("EmpresaCnpj");
-
-                    b.HasIndex("EmpresaCnpj1");
-
-                    b.ToTable("Atividade");
-                });
 
             modelBuilder.Entity("UpperToolsProject.Models.Empresa", b =>
                 {
@@ -122,6 +99,11 @@ namespace UpperToolsProject.Migrations
                     b.HasKey("Cnpj");
 
                     b.ToTable("Empresa");
+
+                    b.HasOne("UpperToolsProject.Models.Empresa", "Empresa")
+                    .WithMany("Qsa")
+                    .HasForeignKey("EmpresaCnpj")
+                    .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("UpperToolsProject.Models.Qsa", b =>
@@ -142,30 +124,16 @@ namespace UpperToolsProject.Migrations
                     b.ToTable("Qsa");
                 });
 
-            modelBuilder.Entity("UpperToolsProject.Models.Atividade", b =>
-                {
-                    b.HasOne("UpperToolsProject.Models.Empresa", null)
-                        .WithMany("AtividadePrincipal")
-                        .HasForeignKey("EmpresaCnpj");
-
-                    b.HasOne("UpperToolsProject.Models.Empresa", null)
-                        .WithMany("AtividadesSecundarias")
-                        .HasForeignKey("EmpresaCnpj1");
-                });
-
             modelBuilder.Entity("UpperToolsProject.Models.Qsa", b =>
                 {
                     b.HasOne("UpperToolsProject.Models.Empresa", null)
                         .WithMany("Qsa")
-                        .HasForeignKey("EmpresaCnpj");
+                        .HasForeignKey("EmpresaCnpj")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("UpperToolsProject.Models.Empresa", b =>
                 {
-                    b.Navigation("AtividadePrincipal");
-
-                    b.Navigation("AtividadesSecundarias");
-
                     b.Navigation("Qsa");
                 });
 #pragma warning restore 612, 618

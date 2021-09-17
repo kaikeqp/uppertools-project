@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,21 @@ namespace UpperToolsProject.Data
             Database.EnsureCreated();
         }
         public DbSet<Empresa> Empresa { get; set; }
+
         public DbSet<Qsa> Qsa { get; set; }
 
+        //public DbSet<Atividade> Atividade { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.NoAction;
+            }
+            base.OnModelCreating(modelBuilder);
+            
+
+        }
     }
 }

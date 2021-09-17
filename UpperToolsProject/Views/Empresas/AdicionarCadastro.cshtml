@@ -9,6 +9,15 @@
 <h4>Cadastrar CNPJ</h4>
 <hr />
 
+@if (TempData["msgSuccess"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["msgSuccess"]</p>
+}
+@if (TempData["msg"] != null)
+{
+    <p class="alert alert-danger" id="dangerMessage">@TempData["msg"]</p>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AdicionarCadastro">

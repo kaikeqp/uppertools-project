@@ -2,7 +2,7 @@
 
 namespace UpperToolsProject.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,32 +42,6 @@ namespace UpperToolsProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Atividade",
-                columns: table => new
-                {
-                    Code = table.Column<string>(type: "varchar(767)", nullable: false),
-                    Text = table.Column<string>(type: "text", nullable: true),
-                    EmpresaCnpj = table.Column<string>(type: "varchar(767)", nullable: true),
-                    EmpresaCnpj1 = table.Column<string>(type: "varchar(767)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Atividade", x => x.Code);
-                    table.ForeignKey(
-                        name: "FK_Atividade_Empresa_EmpresaCnpj",
-                        column: x => x.EmpresaCnpj,
-                        principalTable: "Empresa",
-                        principalColumn: "Cnpj",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Atividade_Empresa_EmpresaCnpj1",
-                        column: x => x.EmpresaCnpj1,
-                        principalTable: "Empresa",
-                        principalColumn: "Cnpj",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Qsa",
                 columns: table => new
                 {
@@ -87,16 +61,6 @@ namespace UpperToolsProject.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Atividade_EmpresaCnpj",
-                table: "Atividade",
-                column: "EmpresaCnpj");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Atividade_EmpresaCnpj1",
-                table: "Atividade",
-                column: "EmpresaCnpj1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Qsa_EmpresaCnpj",
                 table: "Qsa",
                 column: "EmpresaCnpj");
@@ -104,9 +68,6 @@ namespace UpperToolsProject.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Atividade");
-
             migrationBuilder.DropTable(
                 name: "Qsa");
 

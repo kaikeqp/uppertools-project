@@ -43,8 +43,6 @@ namespace UpperToolsProject.Models
         public string Efr { get; set; }
         public string SituacaoEspecial { get; set; }
         public string DataSituacaoEspecial { get; set; }
-        public Atividade[] AtividadePrincipal { get; set; }
-        public Atividade[] AtividadesSecundarias { get; set; }
         public string CapitalSocial { get; set; }
     }
 }

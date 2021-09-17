@@ -49,6 +49,12 @@ namespace UpperToolsProject.Controllers
             return Ok(empresa);
         }
 
+        // GET: Empresas/DSocios
+        //public async Task<IActionResult> Dsocios()
+        //{
+        //   return View(await _context.Qsa.ToListAsync());
+        //}
+
         // GET: Empresas/AdicionarCadastro
         public IActionResult AdicionarCadastro()
         {
@@ -67,32 +73,38 @@ namespace UpperToolsProject.Controllers
             var response = await client.GetAsync(cnpj);
             var content = await response.Content.ReadAsStringAsync();
 
-
-
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["msg"] = "Espere um momento para adicionar um novo CNPJ";
+                return RedirectToAction("AdicionarCadastro");
+            }
+            
             Empresa empresas = JsonConvert.DeserializeObject<Empresa>(content, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
 
+
             if (response.IsSuccessStatusCode && empresas.Status == "OK" && ValidaCNPJ.IsCnpj(cnpj))
-            {
-
-
-                empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
-                if (EmpresaExists(empresas.Cnpj))
                 {
-                    return View("BuscarCadastro");
-                }
-                else
-                    _context.Add(empresas);
-                await _context.SaveChangesAsync();
-                bool success = true;
-                ViewBag.success = success;
 
-            }
+
+                    empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
+                    if (EmpresaExists(empresas.Cnpj))
+                    {
+                        TempData["msg"] = "Este cadastro já existe no sistema";
+                    }
+                    else
+                    {
+                        _context.Add(empresas);
+                        await _context.SaveChangesAsync();
+                        TempData["msgSuccess"] = "Cadastro realizado com sucesso!";
+                    }
+                }
+            
             else
             {
-                return View();
+                TempData["msg"] = "O CNPJ informado é inválido!";
             }
-            return View("AdicionarCadastro");
+            return RedirectToAction("AdicionarCadastro");
         }
 
         // GET: Empresas/BuscarCadastro
@@ -112,9 +124,10 @@ namespace UpperToolsProject.Controllers
 
             if (id == null && nome == null)
             {
-                return NotFound();
+                TempData["msg"] = "O CNPJ informado é inválido!";
+                return RedirectToAction("BuscarCadastro");
             }
-            //colocar avisos caso não ache
+
             Empresa empresa = null;
             if (id != null)
             {
@@ -130,7 +143,8 @@ namespace UpperToolsProject.Controllers
 
             if (empresa == null)
             {
-                return NotFound();
+                TempData["msg"] = "O dado informado é inválido!";
+                return RedirectToAction("BuscarCadastro");
             }
             ViewBag.emp = empresa;
             return View("Details");
@@ -148,8 +162,16 @@ namespace UpperToolsProject.Controllers
         public async Task<IActionResult> DeleteConfirmed(Empresa emp)
         {
             string id = emp.Cnpj;
+
+            id = RemovePontuacao.RmPontCnpj(id);
             var empresa = await _context.Empresa.FindAsync(id);
 
+            if (empresa == null)
+            {
+                TempData["msg"] = "Este CNPJ não está cadastrado";
+                return RedirectToAction("Delete");
+            }
+            empresa.Qsa = null;
             _context.Empresa.Remove(empresa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

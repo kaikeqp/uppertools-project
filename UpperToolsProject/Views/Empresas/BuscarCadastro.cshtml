@@ -9,6 +9,11 @@
 <h4>Buscar</h4>
 <hr />
 
+@if (TempData["msg"] != null)
+{
+    <p class="alert alert-danger" id="dangerMessage">@TempData["msg"]</p>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="BuscarCadastro">
