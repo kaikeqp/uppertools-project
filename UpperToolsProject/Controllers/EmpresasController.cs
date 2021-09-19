@@ -50,7 +50,7 @@ namespace UpperToolsProject.Controllers
         }
 
         // GET: Empresas/DSocios
-        public async Task<IActionResult> Dsocios(Qsa qsa)
+        public async Task<IActionResult> Dsocios()
         {
             var qsatolist = await _context.Qsa.ToListAsync();
             if (qsatolist == null)
@@ -171,6 +171,15 @@ namespace UpperToolsProject.Controllers
 
             id = RemovePontuacao.RmPontCnpj(id);
             var empresa = await _context.Empresa.FindAsync(id);
+
+            var qsatolist = await _context.Qsa.ToListAsync();
+
+            foreach (var item in qsatolist)
+            {
+                _context.Qsa.Remove(item);
+
+            }
+
 
             if (empresa == null)
             {
