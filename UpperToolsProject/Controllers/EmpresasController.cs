@@ -50,10 +50,14 @@ namespace UpperToolsProject.Controllers
         }
 
         // GET: Empresas/DSocios
-        public async Task<IActionResult> Dsocios(Empresa emp, Qsa qsa)
+        public async Task<IActionResult> Dsocios(Qsa qsa)
         {
-            ViewBag.cnpj = emp.Cnpj;
             var qsatolist = await _context.Qsa.ToListAsync();
+            if (qsatolist == null)
+            {
+                ViewData["msg"] = "Este CNPJ não possui sócios";
+                return RedirectToAction("Dsocios");
+            }
             return View(qsatolist);
         }
 

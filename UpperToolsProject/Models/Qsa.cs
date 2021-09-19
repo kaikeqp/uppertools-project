@@ -12,6 +12,7 @@ namespace UpperToolsProject.Models
         [JsonProperty("nome")]
         public string Nome { get; set; }
         [JsonProperty("qual")]
+        [Display(Name ="Qualificação")]
         public string Qual { get; set; }
 
     }
