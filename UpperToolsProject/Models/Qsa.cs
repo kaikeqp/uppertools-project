@@ -14,6 +14,8 @@ namespace UpperToolsProject.Models
         [JsonProperty("qual")]
         [Display(Name ="Qualificação")]
         public string Qual { get; set; }
+        [ForeignKey("EmpresaCnpj")]
+        public string EmpresaCnpj { get; set; }
 
     }
 }

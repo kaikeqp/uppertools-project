@@ -176,6 +176,7 @@ namespace UpperToolsProject.Controllers
 
             foreach (var item in qsatolist)
             {
+                if (id == item.EmpresaCnpj)
                 _context.Qsa.Remove(item);
 
             }
