@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,8 +12,14 @@ namespace UpperToolsProject.Models
     public class AtividadeS
     {
         [Key]
-        public string Code { get; set; }
+        [Display(Name = "Texto")]
+        [JsonProperty("text")]
         public string Text { get; set; }
+        [Display(Name = "Código")]
+        [JsonProperty("code")]
+        public string Code { get; set; }
+        [ForeignKey("EmpresaCnpj")]
+        public string EmpresaCnpj { get; set; }
     }
 
 }

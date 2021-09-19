@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -44,6 +45,10 @@ namespace UpperToolsProject.Models
         public string SituacaoEspecial { get; set; }
         public string DataSituacaoEspecial { get; set; }
         public string CapitalSocial { get; set; }
+        [JsonProperty("atividade_principal")]
+        public List<Atividade> AtividadePrincipal { get; set; }
+        [JsonProperty("atividades_secundarias")]
+        public List<AtividadeS> AtividadesSecundarias { get; set; }
     }
 }
 

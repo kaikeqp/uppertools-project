@@ -18,7 +18,9 @@ namespace UpperToolsProject.Data
 
         public DbSet<Qsa> Qsa { get; set; }
 
-        //public DbSet<Atividade> Atividade { get; set; }
+        public DbSet<Atividade> Atividade { get; set; }
+        public DbSet<AtividadeS> AtividadeS { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

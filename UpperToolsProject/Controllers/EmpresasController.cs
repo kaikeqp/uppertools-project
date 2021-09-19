@@ -173,11 +173,25 @@ namespace UpperToolsProject.Controllers
             var empresa = await _context.Empresa.FindAsync(id);
 
             var qsatolist = await _context.Qsa.ToListAsync();
+            var atptolist = await _context.Atividade.ToListAsync();
+            var atstolist = await _context.AtividadeS.ToListAsync();
 
             foreach (var item in qsatolist)
             {
                 if (id == item.EmpresaCnpj)
                 _context.Qsa.Remove(item);
+
+            }
+            foreach (var item in atptolist)
+            {
+                if (id == item.EmpresaCnpj)
+                    _context.Atividade.Remove(item);
+
+            }
+            foreach (var item in atstolist)
+            {
+                if (id == item.EmpresaCnpj)
+                    _context.AtividadeS.Remove(item);
 
             }
 
