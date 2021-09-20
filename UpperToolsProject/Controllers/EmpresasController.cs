@@ -45,14 +45,72 @@ namespace UpperToolsProject.Controllers
                     qsa.Add(item);
                 }
             }
+            ViewBag.qsa = qsa;
 
-            if (qsa == null)
+            if (qsa == null || qsa.Count == 0)
+            {
+
+             var empresa = await _context.Empresa
+                    .FirstOrDefaultAsync(m => m.Cnpj == emp.Cnpj);
+
+                ViewBag.emp = empresa;
+
+                ViewBag.msg = "Este CNPJ não possui sócios";
+                return View("Details", empresa);
+            }
+            return View(qsa);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AtividadePrimaria(Empresa emp)
+        {
+            var ativpr = await _context.Atividade.ToListAsync();
+
+            List<Atividade> atvp = new List<Atividade>();
+            foreach (var item in ativpr)
+            {
+                if (emp.Cnpj == item.EmpresaCnpj)
+                {
+
+                    atvp.Add(item);
+                }
+            }
+          
+
+            if (atvp == null)
             {
                 ViewData["msg"] = "Este CNPJ não possui sócios";
                 return RedirectToAction("Dsocios");
             }
-            ViewBag.emp = qsa;
-            return View(qsa);
+            ViewBag.nome = "Principal";
+
+            return View("Atividade",atvp);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AtividadeSecundaria(Empresa emp)
+        {
+            var ativse = await _context.AtividadeS.ToListAsync();
+
+            List<AtividadeS> atvs = new List<AtividadeS>();
+            foreach (var item in ativse)
+            {
+                if (emp.Cnpj == item.EmpresaCnpj)
+                {
+
+                    atvs.Add(item);
+                }
+            }
+
+            if (atvs == null)
+            {
+                ViewData["msg"] = "Este CNPJ não possui sócios";
+                return RedirectToAction("Dsocios");
+            }
+            ViewBag.nome = "Secundárias";
+
+
+            return View("AtividadeS", atvs);
         }
 
         // GET: Empresas/AdicionarCadastro
@@ -113,10 +171,16 @@ namespace UpperToolsProject.Controllers
             return View();
         }
 
+        // GET: Empresas/Details
+        public IActionResult Details ()
+        {
+            return View();
+        }
+
         // POST: Empresas/Details/cnpj
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details(Empresa emp,Qsa qsa, string Cnpj)
+        public async Task<IActionResult> Details(Empresa emp)
         {
             emp.Cnpj = RemovePontuacao.RmPontCnpj(emp.Cnpj);
             string id = emp.Cnpj;
@@ -147,8 +211,8 @@ namespace UpperToolsProject.Controllers
                 return RedirectToAction("BuscarCadastro");
             }
             ViewBag.emp = empresa;
-            ViewBag.qsa = empresa.Cnpj;
-            return View(emp);
+
+            return View(empresa);
             //return RedirectToAction("Details");
         }
 

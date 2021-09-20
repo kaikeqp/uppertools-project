@@ -1,0 +1,50 @@
+﻿@model IEnumerable<UpperToolsProject.Models.Atividade>
+
+@{
+    ViewData["Title"] = "Details - Atividades";
+}
+
+<h1>Informações</h1>
+
+<h4>Atividade @ViewBag.nome</h4>
+<hr />
+
+<table class="col-sm table-bordered table-striped ">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpresaCnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpresaCnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<form asp-action="Details" asp-controller="Empresas">
+    <input type="hidden" name="Cnpj" value="@(Model.First().EmpresaCnpj)" />
+    <input class="btn btn-outline-info" type="submit" value="Voltar" />
+</form>
+
+

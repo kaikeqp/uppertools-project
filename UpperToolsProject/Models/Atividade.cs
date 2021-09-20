@@ -14,10 +14,10 @@ namespace UpperToolsProject.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Display(Name ="Texto")]
+        [Display(Name ="Descrição")]
         [JsonProperty("text")]
         public string Text { get; set; }
-        [Display(Name ="Código")]
+        [Display(Name ="Código CNAE")]
         [JsonProperty("code")]
         public string Code { get; set; }
         [ForeignKey("EmpresaCnpj")]

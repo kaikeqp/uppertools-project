@@ -5,43 +5,44 @@
 }
 
 <h1>Informações</h1>
-
-<table class="table-striped table-responsive ">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EmpresaCnpj)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Qual)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            
+<div>
+    <table class="col-sm table-bordered table-striped ">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmpresaCnpj)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Qual)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpresaCnpj)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qual)
+                </th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
 
-        }
-    </tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmpresaCnpj)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qual)
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+</div>
 </table>
-    <form asp-action="Details" asp-controller="Empresas">
-        <input type="hidden" name="Cnpj" value="@(Model.First().EmpresaCnpj)" />
-        <input class="btn btn-outline-info" type="submit" value="Voltar" />
-    </form>
+<form asp-action="Details" asp-controller="Empresas">
+    <input type="hidden" name="Cnpj" value="@(Model.First().EmpresaCnpj)" />
+    <input class="btn btn-outline-info" type="submit" value="Voltar" />
+</form>
 
 
