@@ -29,36 +29,29 @@ namespace UpperToolsProject.Controllers
             return View(await _context.Empresa.ToListAsync());
         }
 
-        // GET: Empresas/Details/id
-        //[HttpGet("Empresas/Details/{id}")]
-        public async Task<IActionResult> Details(string id)
-        {
 
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.Cnpj == id);
-            if (empresa == null)
-            {
-                return NotFound();
-            }
-            View(empresa);
-            return Ok(empresa);
-        }
-
-        // GET: Empresas/DSocios
-        public async Task<IActionResult> Dsocios()
+        // Post: Empresas/DSocios
+        [HttpPost]
+        public async Task<IActionResult> Dsocios(Empresa emp)
         {
             var qsatolist = await _context.Qsa.ToListAsync();
-            if (qsatolist == null)
+
+            List<Qsa> qsa = new List<Qsa>();
+            foreach (var item in qsatolist)
+            {
+                if (emp.Cnpj == item.EmpresaCnpj)
+                {
+                    
+                    qsa.Add(item);
+                }
+            }
+
+            if (qsa == null)
             {
                 ViewData["msg"] = "Este CNPJ não possui sócios";
                 return RedirectToAction("Dsocios");
             }
-            return View(qsatolist);
+            return View(qsa);
         }
 
         // GET: Empresas/AdicionarCadastro
@@ -119,10 +112,10 @@ namespace UpperToolsProject.Controllers
             return View();
         }
 
-        // POST: Empresas/BuscarCadastro
+        // POST: Empresas/Details/cnpj
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BuscarCadastro(Empresa emp)
+        public async Task<IActionResult> Details(Empresa emp)
         {
             emp.Cnpj = RemovePontuacao.RmPontCnpj(emp.Cnpj);
             string id = emp.Cnpj;
@@ -153,7 +146,8 @@ namespace UpperToolsProject.Controllers
                 return RedirectToAction("BuscarCadastro");
             }
             ViewBag.emp = empresa;
-            return View("Details");
+            return View(emp);
+            //return RedirectToAction("Details");
         }
 
         // GET: Empresas/Delete/

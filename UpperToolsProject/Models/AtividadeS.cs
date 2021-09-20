@@ -12,6 +12,8 @@ namespace UpperToolsProject.Models
     public class AtividadeS
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Display(Name = "Texto")]
         [JsonProperty("text")]
         public string Text { get; set; }

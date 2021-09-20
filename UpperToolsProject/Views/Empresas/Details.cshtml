@@ -163,11 +163,13 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Qsa)
         </dt>
-        <dd class="col-sm-10">
-            <a asp-action="Dsocios">Socios</a>
-        </dd>
     </dl>
+    <form asp-action="Dsocios" asp-controller="Empresas">
+        <input type="hidden" name="Cnpj" value="@Model.Cnpj" />
+        <input type="submit" value="Socios" />
+    </form>
 </div>
 <div>
     <a asp-action="BuscarCadastro">Voltar</a>
 </div>
+
