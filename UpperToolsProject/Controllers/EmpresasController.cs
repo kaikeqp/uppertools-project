@@ -51,6 +51,7 @@ namespace UpperToolsProject.Controllers
                 ViewData["msg"] = "Este CNPJ não possui sócios";
                 return RedirectToAction("Dsocios");
             }
+            ViewBag.emp = qsa;
             return View(qsa);
         }
 
@@ -115,7 +116,7 @@ namespace UpperToolsProject.Controllers
         // POST: Empresas/Details/cnpj
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details(Empresa emp)
+        public async Task<IActionResult> Details(Empresa emp,Qsa qsa, string Cnpj)
         {
             emp.Cnpj = RemovePontuacao.RmPontCnpj(emp.Cnpj);
             string id = emp.Cnpj;
@@ -146,6 +147,7 @@ namespace UpperToolsProject.Controllers
                 return RedirectToAction("BuscarCadastro");
             }
             ViewBag.emp = empresa;
+            ViewBag.qsa = empresa.Cnpj;
             return View(emp);
             //return RedirectToAction("Details");
         }

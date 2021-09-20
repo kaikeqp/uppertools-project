@@ -6,7 +6,7 @@
 
 <h1>Informações</h1>
 
-<table class="table-striped table-responsive">
+<table class="table-striped table-responsive ">
     <thead>
         <tr>
             <th>
@@ -23,20 +23,25 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpresaCnpj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qual)
-            </td>
-        </tr>
+            
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpresaCnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qual)
+                </td>
+            </tr>
+
         }
     </tbody>
 </table>
-    <a asp-action="BuscarCadastro">Voltar</a>
+    <form asp-action="Details" asp-controller="Empresas">
+        <input type="hidden" name="Cnpj" value="@(Model.First().EmpresaCnpj)" />
+        <input class="btn btn-outline-info" type="submit" value="Voltar" />
+    </form>
 
 
