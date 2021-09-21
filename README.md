@@ -1,4 +1,7 @@
 # uppertools-project - Kaike de Santana
+
+PROJETO EM AÇÃO https://www.youtube.com/watch?v=Jruh30O3k0U
+
 # Plataforma integrada
 
 Exercício feito com propósito de ingresso no processo de seleção para oportunidade de desenvolvimento na Uppertools Tecnologia da Informação
