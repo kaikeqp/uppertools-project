@@ -72,18 +72,18 @@ namespace UpperToolsProject.Models
         [StringLength(8)]
         public string Numero { get; set; }
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string Complemento { get; set; }
 
         [Display(Name = "CEP")]
         [StringLength(15)]
         public string Cep { get; set; }
 
-        [StringLength(100)]
+        [StringLength(200)]
         public string Bairro { get; set; }
 
         [Display(Name = "Município")]
-        [StringLength(40)]
+        [StringLength(100)]
         public string Municipio { get; set; }
 
         [Display(Name = "UF")]
@@ -106,7 +106,7 @@ namespace UpperToolsProject.Models
         public string DataSituacaoEspecial { get; set; }
 
         [Display(Name = "Valor do capital social")]
-        [StringLength(16)]
+        [StringLength(25)]
         public string CapitalSocial { get; set; }
 
         [JsonProperty("atividade_principal")]
@@ -116,7 +116,7 @@ namespace UpperToolsProject.Models
 
         [JsonProperty("atividades_secundarias")]
         [Display(Name = "Atividades secundárias")]
-        [StringLength(100)]
+        [StringLength(200)]
         public List<AtividadeS> AtividadesSecundarias { get; set; }
     }
 }
