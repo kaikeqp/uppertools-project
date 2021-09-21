@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7YiT7y6UNGuqlSHmNiYCJ/ImlZzxXJJyQvxFS0iy1yucKsbE9whqikuK3wvxMDyTktpFBbVOQlY45QVAPUJKmg==",
+  "dgSpecHash": "l4mwRP6bKMpPHZA+/T+xyeN9e+4QtW6Be5BytEFZkq/odBSLNM38L4S+1p5vcdlNDeg7v/Aurp0cuHCegjPBhA==",
   "success": true,
   "projectFilePath": "C:\\Users\\kaike\\workspaces\\ws_net\\UpperToolsProject\\UpperToolsProject\\UpperToolsProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kaike\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\kaike\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",
     "C:\\Users\\kaike\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\kaike\\.nuget\\packages\\jquery\\1.6.3\\jquery.1.6.3.nupkg.sha512",
     "C:\\Users\\kaike\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\kaike\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\kaike\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
@@ -172,8 +171,7 @@
     "C:\\Users\\kaike\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\kaike\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\kaike\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\kaike\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\kaike\\.nuget\\packages\\toastr\\2.1.1\\toastr.2.1.1.nupkg.sha512"
+    "C:\\Users\\kaike\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

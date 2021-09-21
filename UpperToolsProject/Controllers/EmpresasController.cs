@@ -29,24 +29,26 @@ namespace UpperToolsProject.Controllers
             return View(await _context.Empresa.ToListAsync());
         }
 
-
-        // Post: Empresas/DSocios
+        // ESTE MÉTODO FAZ COM QUE UMA PÁGINA MOSTRE APENAS OS SÓCIOS DO CNPJ RECEBIDO
+        // POST: Empresas/DSocios
         [HttpPost]
         public async Task<IActionResult> Dsocios(Empresa emp)
         {
             var qsatolist = await _context.Qsa.ToListAsync();
 
             List<Qsa> qsa = new List<Qsa>();
+
+            // SE O CNPJ ENVIADO PELA PÁGINA 'Details' FOR IGUAL À CNPJ's DO BANCO DE DADOS 'Qsa', ENTÃO ESSES CNPJS SÃO ADICIONADOS À UMA LISTA
             foreach (var item in qsatolist)
             {
                 if (emp.Cnpj == item.EmpresaCnpj)
-                {
-                    
+                {               
                     qsa.Add(item);
                 }
             }
             ViewBag.qsa = qsa;
 
+            // VALIDAÇÃO PARA NOTIFICAR ERRO CASO A EMPRESA NÃO TENHA SÓCIOS
             if (qsa == null || qsa.Count == 0)
             {
 
@@ -54,19 +56,23 @@ namespace UpperToolsProject.Controllers
                     .FirstOrDefaultAsync(m => m.Cnpj == emp.Cnpj);
 
                 ViewBag.emp = empresa;
-
                 ViewBag.msg = "Este CNPJ não possui sócios";
+
                 return View("Details", empresa);
             }
             return View(qsa);
         }
 
+
+        // POST: Empresas/AtividadePrimaria
         [HttpPost]
         public async Task<IActionResult> AtividadePrimaria(Empresa emp)
         {
             var ativpr = await _context.Atividade.ToListAsync();
 
             List<Atividade> atvp = new List<Atividade>();
+
+            // SE O CNPJ ENVIADO PELA PÁGINA 'Details' FOR IGUAL À CNPJ's DO BANCO DE DADOS 'Atividade', ENTÃO ESSES CNPJS SÃO ADICIONADOS À UMA LISTA
             foreach (var item in ativpr)
             {
                 if (emp.Cnpj == item.EmpresaCnpj)
@@ -75,24 +81,21 @@ namespace UpperToolsProject.Controllers
                     atvp.Add(item);
                 }
             }
-          
-
-            if (atvp == null)
-            {
-                ViewData["msg"] = "Este CNPJ não possui sócios";
-                return RedirectToAction("Dsocios");
-            }
+         
             ViewBag.nome = "Principal";
 
             return View("Atividade",atvp);
         }
 
+        // POST: Empresas/AtividadeSecundaria
         [HttpPost]
         public async Task<IActionResult> AtividadeSecundaria(Empresa emp)
         {
             var ativse = await _context.AtividadeS.ToListAsync();
 
             List<AtividadeS> atvs = new List<AtividadeS>();
+
+            // SE O CNPJ ENVIADO PELA PÁGINA 'Details' FOR IGUAL À CNPJ's DO BANCO DE DADOS 'AtividadeS', ENTÃO ESSES CNPJS SÃO ADICIONADOS À UMA LISTA
             foreach (var item in ativse)
             {
                 if (emp.Cnpj == item.EmpresaCnpj)
@@ -102,13 +105,7 @@ namespace UpperToolsProject.Controllers
                 }
             }
 
-            if (atvs == null)
-            {
-                ViewData["msg"] = "Este CNPJ não possui sócios";
-                return RedirectToAction("Dsocios");
-            }
             ViewBag.nome = "Secundárias";
-
 
             return View("AtividadeS", atvs);
         }
@@ -119,6 +116,7 @@ namespace UpperToolsProject.Controllers
             return View();
         }
 
+        // ESTE MÉTODO RECEBE UM CNPJ E BUSCA INFORMAÇÕES DA EMPRESA E Á ADICIONA AO BANCO DE DADOS
         // POST: Empresas/AdicionarCadastro
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -127,24 +125,25 @@ namespace UpperToolsProject.Controllers
             HttpClient client = new HttpClient { BaseAddress = new Uri("https://www.receitaws.com.br/v1/cnpj/") };
 
             string cnpj = empresa.Cnpj;
-            cnpj = RemovePontuacao.RmPontCnpj(cnpj);
+            cnpj = RemovePontuacao.RmPontCnpj(cnpj); // REMOVE MASCARA/PONTUAÇÕES DO CNPJ RECEBIDO
             var response = await client.GetAsync(cnpj);
             var content = await response.Content.ReadAsStringAsync();
 
+            //CASO HAJA MAIS DE 3 REQUISIÇÕES DE CNPJ EM 1 MINUTO, FEITA PARA A API DA RECEITA FEDERAL, ELA RETORNA STATUS DE ERROR,
+            //NESTE CASO, A APLICAÇÃO NOTIFICA QUE O USUÁRIO DEVE ESPERAR UM MOMENTO ATÉ A PROXIMA REQUISIÇÃO
             if (!response.IsSuccessStatusCode)
             {
                 TempData["msg"] = "Espere um momento para adicionar um novo CNPJ";
                 return RedirectToAction("AdicionarCadastro");
             }
             
+            // DESERIALIZA O ARQUIVO JSON RECEBIDO PELA API
             Empresa empresas = JsonConvert.DeserializeObject<Empresa>(content, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
 
-
+            // VALIDAÇÕES DE CNPJ RECEBIDO
             if (response.IsSuccessStatusCode && empresas.Status == "OK" && ValidaCNPJ.IsCnpj(cnpj))
                 {
-
-
                     empresas.Cnpj = RemovePontuacao.RmPontCnpj(empresas.Cnpj);
                     if (EmpresaExists(empresas.Cnpj))
                     {
@@ -156,8 +155,7 @@ namespace UpperToolsProject.Controllers
                         await _context.SaveChangesAsync();
                         TempData["msgSuccess"] = "Cadastro realizado com sucesso!";
                     }
-                }
-            
+                }       
             else
             {
                 TempData["msg"] = "O CNPJ informado é inválido!";
@@ -177,6 +175,7 @@ namespace UpperToolsProject.Controllers
             return View();
         }
 
+        // ESTE MÉTODO APÓS RECEBER UM CNPJ, BUSCA TODAS AS INFORMAÇÕES DA EMPRESA CORRESPONDENTE NO BANCO DE DADOS
         // POST: Empresas/Details/cnpj
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -213,7 +212,6 @@ namespace UpperToolsProject.Controllers
             ViewBag.emp = empresa;
 
             return View(empresa);
-            //return RedirectToAction("Details");
         }
 
         // GET: Empresas/Delete/
@@ -222,10 +220,11 @@ namespace UpperToolsProject.Controllers
             return View();
         }
 
+        // ESTE METODO RECEBE UM CNPJ E DELETA TODAS AS INFORMAÇÕES DA EMPRESA CORRESPONDENTE
         // POST: Empresas/Delete/cnpj
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Empresa emp)
+        public async Task<IActionResult> Delete(Empresa emp)
         {
             string id = emp.Cnpj;
 

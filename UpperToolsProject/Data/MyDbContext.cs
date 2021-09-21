@@ -12,25 +12,12 @@ namespace UpperToolsProject.Data
     {
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.EnsureCreated(); // CRIA O BANCO DE DADOS CASO ELE NÃO EXISTA E INICIALIZA O ESQUEMA DE BANCO DE DADOS
         }
         public DbSet<Empresa> Empresa { get; set; }
-
         public DbSet<Qsa> Qsa { get; set; }
-
         public DbSet<Atividade> Atividade { get; set; }
         public DbSet<AtividadeS> AtividadeS { get; set; }
 
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
-            }            
-
-        }
     }
 }
